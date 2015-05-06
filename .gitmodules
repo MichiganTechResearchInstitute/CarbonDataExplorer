@@ -1,9 +1,9 @@
 [submodule "flux-server"]
 	path = flux-server
-	url = git@github.com:arthur-e/flux-server.git
+	url = https://github.com/arthur-e/flux-server.git
 [submodule "flux-client"]
 	path = flux-client
-	url = git@github.com:arthur-e/flux-client.git
+	url = https://github.com/arthur-e/flux-client.git
 [submodule "flux-python-api"]
 	path = flux-python-api
-	url = git@github.com:arthur-e/flux-python-api.git
+	url = https://github.com/arthur-e/flux-python-api.git
