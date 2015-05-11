@@ -30,7 +30,7 @@ sudo ./flux-server/setup.sh
 # Step 3. Install flux-client
 echo -en "\n\nInstalling submodule: flux-client...\n-----------------------------------\n\n"
 
-(cd .flux-client && ./setup.sh)
+(cd ./flux-client/ && ./setup.sh)
 
 # Done.
 echo -en "\n\nCarbonDataExplorer installation complete!"
