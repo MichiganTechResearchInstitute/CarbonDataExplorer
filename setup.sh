@@ -1,3 +1,5 @@
+VIRTUALENVPATH="/usr"
+
 # Step 1. Install flux-python-api
 echo -en "\nInstalling submodule: flux-python-api...\n-----------------------------------\n\n"
 
@@ -30,7 +32,18 @@ sudo ./flux-server/setup.sh
 # Step 3. Install flux-client
 echo -en "\n\nInstalling submodule: flux-client...\n-----------------------------------\n\n"
 
-(cd ./flux-client/ && ./setup.sh)
+while true; do
+    read -p "Install pre-built version of flux-client? (y/n) " yn
+    case $yn in
+        [Yy]* ) sudo wget ftp://ftp.mtri.org/pub/Flux_Visualizations/flux-client.zip; sudo unzip flux-client -d /var/www/CarbonDataExplorer;
+                echo -en "\nBuilt version of flux-client has been installed to: /var/www/CarbonDataExplorer\n\nThe client can be accessed at: http://localhost/CarbonDataExplorer"
+                break;;
+        [Nn]* ) echo "You answered 'no'; flux-client will need to be built from source; consult ./flux-client/README.md for detailed instructions."; break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 
 # Done.
 echo -en "\n\nCarbonDataExplorer installation complete!"
+echo -en "\n\n******FOLLOW THESE REMAINING STEPS TO COMPLETE SETUP******\n\n1. Make sure to configure apache as instructed in ./flux-server/README.md under 'Configuring a Port Proxy with Apache'\n\n2. Load your data. Sample data is available in ./flux-python-api/fluxpy/tests/. Command to load the sample data:
+$VIRTUALENVPATH/bin/python ./flux-python-api/manage.py load -p ./flux-path-api/fluxpy/tests/casagfed2004.mat -m SpatioTemporalMatrix -n casa_gfed_2004\n\n3. Start the flux-server:\nforever ./flux-server/flux-server.js\n\n4. Go to http://localhost/CarbonDataExplorer and check it out!\n\n"
