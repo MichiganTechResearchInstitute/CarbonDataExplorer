@@ -1,13 +1,15 @@
 VIRTUALENVPATH="/usr"
 
 # Step 1. Install flux-python-api
-echo -en "\nInstalling submodule: flux-python-api...\n-----------------------------------\n\n"
+echo -en "\nInstalling submodule: flux-python-api...
+            -----------------------------------\n\n"
 
 while true; do
     read -p "Install flux-python-api using virtual environment (recommended)? (y/n) " yn
     case $yn in
         [Yy]* ) sudo apt-get install python-virtualenv;
-                read -e -p "Enter desired path to virtual env (CHECK THAT PARENT DIRECTORY EXISTS): " -i "/usr/local/pythonenv/flux-python-api-env" VIRTUALENVPATH;
+                read -e -p "Enter desired path to virtual env: " -i "/usr/local/pythonenv/flux-python-api-env" VIRTUALENVPATH;
+                sudo mkdir -p ${VIRTUALENVPATH%/*};
                 sudo virtualenv $VIRTUALENVPATH;
                 sudo chown -R $USER $VIRTUALENVPATH;
                 source $VIRTUALENVPATH/bin/activate;
@@ -21,7 +23,8 @@ done
 
 
 # Step 2. Install flux-server
-echo -en "\n\nInstalling submodule: flux-server...\n-----------------------------------\n\n"
+echo -en "\n\nInstalling submodule: flux-server...
+              ----------------------------------\n\n"
 
 sudo apt-get install nodejs nodejs-legacy
 sudo apt-get install npm
@@ -30,7 +33,7 @@ sudo ./flux-server/setup.sh
 (cd ./flux-server/ && sudo npm install)
 
 while true; do
-    read -p "Install and configure apache for flux-server? (y/n) " yn
+    read -p "Install apache2 packages required for flux-server & flux-client? (y/n) " yn
     case $yn in
         [Yy]* ) sudo apt-get install apache2 apache2-bin apache2-data apache2-mpm-worker
                 sudo a2enmod proxy proxy_http rewrite
@@ -42,13 +45,16 @@ while true; do
 done
 
 # Step 3. Install flux-client
-echo -en "\n\nInstalling submodule: flux-client...\n-----------------------------------\n\n"
+echo -en "\n\nInstalling submodule: flux-client...
+              -----------------------------------\n\n"
 
 while true; do
     read -p "Install pre-built version of flux-client? (y/n) " yn
     case $yn in
-        [Yy]* ) sudo wget ftp://ftp.mtri.org/pub/Flux_Visualizations/flux-client.zip; sudo unzip flux-client -d /var/www/flux-client;
-                echo -en "\nFlux-client has been installed to: /var/www/flux-client\n\nThe client can be accessed at: http://localhost/flux-client"
+        [Yy]* ) sudo mkdir -p /var/www;
+                sudo wget ftp://ftp.mtri.org/pub/Flux_Visualizations/flux-client.zip;
+                sudo unzip flux-client -d /var/www/flux-client;
+                echo -en "\nFlux-client has been installed to: /var/www/flux-client";
                 break;;
         [Nn]* ) echo "You answered 'no'; flux-client will need to be built from source; consult ./flux-client/README.md for detailed instructions."; break;;
         * ) echo "Please answer yes or no.";;
