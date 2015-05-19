@@ -26,8 +26,7 @@ done
 echo -en "\n\nInstalling submodule: flux-server...
               ----------------------------------\n\n"
 
-sudo apt-get install nodejs nodejs-legacy
-sudo apt-get install npm
+sudo apt-get install nodejs nodejs-legacy npm
 sudo chmod ug+x ./flux-server/setup.sh
 sudo ./flux-server/setup.sh
 (cd ./flux-server/ && sudo npm install)
@@ -68,14 +67,22 @@ CarbonDataExplorer installation complete!
 ******FOLLOW THESE REMAINING STEPS TO COMPLETE SETUP******
 
 1. Configure apache for both *flux-client* and *flux-server* using the configuration suggested under:
-./apache/example.conf
-(for more details see: ./flux-server/README.md under 'Configuring a Port Proxy with Apache')
 
-2. Load your data using *flux-python-api* (see ./flux-python-api/README.md for details).
-Sample data is available in ./flux-python-api/fluxpy/tests/; use this command to load the sample data/test that flux-python-api installed correctly:
-$VIRTUALENVPATH/bin/python ./flux-python-api/manage.py load -p ./flux-python-api/fluxpy/tests/casagfed2004.mat -m SpatioTemporalMatrix -n casa_gfed_2004
+    $ ./apache/example.conf
+    
+* For more details see: ./flux-server/README.md under 'Configuring a Port Proxy with Apache')
+* Remember to restart apache after making configuration changes:
+
+    $ sudo service apache2 restart
+
+2. Load your data using *flux-python-api* (see **./flux-python-api/README.md** for details).
+* A small sample dataset is available in **./flux-python-api/fluxpy/tests/**
+* Use the following command to load this sample data and test that *flux-python-api* installed correctly:
+
+    $ /usr/local/pythonenv/flux-python-api-env/bin/python ./flux-python-api/manage.py load -p ./flux-path-api/fluxpy/tests/casagfed2004.mat -m SpatioTemporalMatrix -n SAMPLE_casagfed2004
 
 3. Start the *flux-server* using this command:
-forever ./flux-server/flux-server.js
 
-4. Go to http://localhost/flux-client and check it out!\n\n"
+    $ forever ./flux-server/flux-server.js
+
+4. Go to **http://localhost/flux-client** and check it out!"
