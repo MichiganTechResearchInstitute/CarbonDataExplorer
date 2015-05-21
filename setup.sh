@@ -79,10 +79,11 @@ CarbonDataExplorer installation complete!
 * A small sample dataset is available in **./flux-python-api/fluxpy/tests/**
 * Use the following command to load this sample data and test that *flux-python-api* installed correctly:
 
-    $ /usr/local/pythonenv/flux-python-api-env/bin/python ./flux-python-api/manage.py load -p ./flux-path-api/fluxpy/tests/casagfed2004.mat -m SpatioTemporalMatrix -n SAMPLE_casagfed2004
+    $ /usr/local/pythonenv/flux-python-api-env/bin/python ./flux-python-api/manage.py load -p ./flux-python-api/fluxpy/tests/casagfed2004.mat -m SpatioTemporalMatrix -n SAMPLE_casagfed2004
 
 3. Start the *flux-server* using this command:
 
     $ forever ./flux-server/flux-server.js
 
-4. Go to **http://localhost/flux-client** and check it out!"
+4. Go to **http://localhost/flux-client** and check it out!
+"
