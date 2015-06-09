@@ -3,6 +3,9 @@ Carbon Data Explorer
 
 A web-based visualization tool for multi-dimensional geospatial gridded datasets.
 
+* Background info: [spatial.mtri.org/flux](http://spatial.mtri.org/flux)
+* Demo site: [spatial.mtri.org/flux-client](http://spatial.mtri.org/flux-client)
+
 ### Documentation for Users
 
 * Using the web client:
