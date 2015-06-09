@@ -52,9 +52,9 @@ After cloning this repository to your local system, `cd` into it and run setup:
 The `setup.sh` script will install the three submodules (and all associated
 dependencies) of the Carbon Data Explorer:
 
-* [flux-python-api](https://github.com/arthur-e/flux-client)
+* [flux-python-api](https://github.com/arthur-e/flux-python-api)
 * [flux-server](https://github.com/arthur-e/flux-server)
-* [flux-client](https://github.com/arthur-e/flux-python-api)
+* [flux-client](https://github.com/arthur-e/flux-client)
 
 Each submodule has its own `README.md` that provides details on installation
 and deployment, but ignore those; this `setup.sh` script acts as a standalone
