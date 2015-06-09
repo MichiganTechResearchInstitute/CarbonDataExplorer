@@ -1,20 +1,20 @@
 Carbon Data Explorer
 ====================
 
-A visualization tool for multi-dimensional geospatial gridded datasets.
+A web-based visualization tool for multi-dimensional geospatial gridded datasets.
 
 ### Documentation for Users
 
 * Using the web client:
     * [User's guide](https://docs.google.com/document/d/17qttP61aVsBPAS6tj6H0_VVkgTV2XQ6WuAb_PMyVoaM/edit?usp=sharing)
-    * [Demo video](INSERT LINK HERE)
+    * [Demo video](https://vimeo.com/129796671)
 
 * Loading data using the Python API: See **Manage.py Quick Reference** section in `./flux-python-api/README.md`
-* Using the server API: See `./flux-server/REFERENCE.md`
+* Using the server API outside of the web client: See `./flux-server/REFERENCE.md`
 
 ### Documentation for Developers
 
-* `flux-python-api`: See **Code Documentation** section in `./flux-python-api/README.md`
+* `flux-python-api`: See `./flux-python-api/docs/README.md`
 * `flux-server`: See **Code Documentation** section in `./flux-server/README.md`
 * `flux-client`: See **Code Documentation** section in `./flux-client/README.md`
 
@@ -54,9 +54,9 @@ dependencies) of the Carbon Data Explorer:
 * [flux-client](https://github.com/arthur-e/flux-python-api)
 
 Each submodule has its own `README.md` that provides details on installation
-and deployment, but this `setup.sh` script acts as a standalone installer for
-the entire package, all submodules included.
-    
+and deployment, but ignore those; this `setup.sh` script acts as a standalone
+installer for the entire package, all submodules included.
+
     
 ### Configure Apache
 
@@ -199,13 +199,13 @@ The following paths are recommended:
 Quick Start
 -----------
 
-After installation on either OS, perform the following steps to get the application up and running.
+After installation on either OS, perform the following steps to begin using the Carbon Data Explorer.
 
-1. **Load** your data using `flux-python-api` (see `./flux-python-api/README.md` for more details and other data manipulation capabilities).
+1. **Load** some data using `flux-python-api` (see `./flux-python-api/README.md` for more details and other data manipulation capabilities).
 
     A small sample dataset is available in `./flux-python-api/fluxpy/tests/`; use the following command to load this sample data and test that `flux-python-api` installed correctly.
 
-    * If using a `virtualenv` (subsitute path to your `virtualenv` not using default):
+    * If using a `virtualenv` (subsitute path to your `virtualenv` if not using default):
     
             $ /usr/local/pythonenv/flux-python-api-env/bin/python ./flux-python-api/manage.py load -p ./flux-python-api/fluxpy/tests/casagfed2004.mat -m SpatioTemporalMatrix -n SAMPLE_casagfed2004
 
@@ -218,12 +218,11 @@ After installation on either OS, perform the following steps to get the applicat
         $ forever ./flux-server/flux-server.js
     
     Once started, you can test to see if it is working by going to this URL: [http://localhost/flux/api/scenarios.json](http://localhost/flux/api/scenarios.json)
-    If you loaded the sample data as instructed above, a pointer to that dataset should show up in the 
-    JSON response given by the URL.
+    If you loaded the sample data as instructed above, a pointer to that dataset should show up in the JSON response given by the URL.
     
     To stop or restart `flux-server`, use these commands:
     
         $ forever stop flux-server.js
         $ forever restart 0
     
-3. **Go** to [http://localhost/flux-client](http://localhost/flux-client) and check it out!
+3. **Go** to [http://localhost/flux-client](http://localhost/flux-client) and begin exploring!
