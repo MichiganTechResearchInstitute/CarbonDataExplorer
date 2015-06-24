@@ -45,6 +45,7 @@ Be aware that these are the default/recommended installation paths:
 You may need to update the submodules:
 
     $ git submodule foreach git pull origin master
+    $ git submodule foreach git checkout master
 
 ### Run setup.sh
 
