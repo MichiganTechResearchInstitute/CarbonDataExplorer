@@ -22,7 +22,7 @@ A web-based visualization tool for multi-dimensional geospatial gridded datasets
 * `flux-client`: See **Code Documentation** section in `./flux-client/README.md`
 
 
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 Installation: Linux
 -------------------
@@ -32,15 +32,19 @@ The following steps have been tested and verified for **Ubuntu 14.04.2 LTS**.
 
 Be aware that these are the default/recommended installation paths:
 
-    /usr/local/project/CarbonDataExplorer     #<- where this README.md file lives; repo location
-    /usr/local/pythonenv/flux-python-api-env  #<- where the Python virtualenv for flux-python-api lives
-    /var/www/flux-client                      #<- where the flux-client web client lives
+    /usr/local/project/CarbonDataExplorer     # <- where this README.md file lives; repo location
+    /usr/local/pythonenv/flux-python-api-env  # <- where the Python virtualenv for flux-python-api lives
+    /var/www/flux-client                      # <- where the flux-client web client lives
 
 
 ### Clone repository
 
     $ cd /usr/local/project
-    $ sudo git clone --recursive https://github.com/arthur-e/CarbonDataExplorer.git
+    $ git clone --recursive https://github.com/arthur-e/CarbonDataExplorer.git
+
+You may need to update the submodules:
+
+    $ git submodule foreach git pull origin master
 
 ### Run setup.sh
 
@@ -60,7 +64,7 @@ Each submodule has its own `README.md` that provides details on installation
 and deployment, but ignore those; this `setup.sh` script acts as a standalone
 installer for the entire package, all submodules included.
 
-    
+
 ### Configure Apache
 
 Configure apache for both `flux-client` and `flux-server` using this example configuration as guidance:
@@ -74,7 +78,7 @@ Remember to restart `apache` after making any configuration changes:
     $ sudo service apache2 restart
 
 
-        
+
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 Installation: Mac OSX
@@ -87,12 +91,12 @@ The following steps were tested and verified for **OSX 10.9.5**.
 The following paths are recommended:
 
 * Where the repository lives (including this file):
-    
-        $ REPO_PATH=/usr/local/project/CarbonDataExplorer     
-    
+
+        $ REPO_PATH=/usr/local/project/CarbonDataExplorer
+
 * Where the Python virtualenv for `flux-python-api` lives (if used):
 
-        $ VENV_PATH=/usr/local/pythonenv/flux-python-api-env 
+        $ VENV_PATH=/usr/local/pythonenv/flux-python-api-env
 
 * Where the `flux-client` web client lives (should be a web-accessible directory):
 
@@ -108,7 +112,7 @@ The following paths are recommended:
 
         $ cd $REPO_PATH
         $ git clone --recursive https://github.com/arthur-e/CarbonDataExplorer.git ./
-        
+
     Older versions of **Git** may require that the submodules are initialized separately with the following command (if the repository's submodule directories- i.e. `flux-python-api`, `flux-client`, and `flux-server`- are empty, do this):
 
         $ git submodule update --init --recursive
@@ -126,7 +130,7 @@ The following paths are recommended:
         $ brew install wget mongodb geos libxml2 libxslt gcc homebrew/science/hdf5 python
 
 ### Install package submodules
-    
+
 1. Install `flux-python-api`
 
     You are encouraged to use a Python `virtualenv` to keep project-specific Python libraries separate from system-wide Python libraries. This can be set up and activated using these commands:
@@ -135,24 +139,24 @@ The following paths are recommended:
         $ virtualenv $VENV_PATH
         $ sudo chown -R $USER $VENV_PATH
         $ source $VENV_PATH/bin/activate
-    
+
     Run the python installer for `flux-python-api`:
-    
+
         $ cd $REPO_PATH/flux-python-api
         $ python setup.py install # <- use 'sudo' ONLY if NOT using a virtualenv
-    
+
     * If the installer ran into errors while installing the Python package dependencies, try installing the most current packages listed in `./flux-python-api/DEPENDENCIES.txt` separately via `pip`, e.g.:
-    
+
             $ pip install h5py
-    
+
     Once all packages are installed...
-    
+
     * If using a `virtualenv`:
-    
+
             $ deactivate
 
     Finally, change some permissions:
-    
+
         $ sudo chmod -R 777 flux_python_api.egg-info
         $ sudo chmod -R 777 dist
         $ sudo chmod -R 777 build/
@@ -162,14 +166,14 @@ The following paths are recommended:
         $ cd $REPO_PATH/flux-server/
         $ sudo ./setup.sh
         $ npm install
-    
+
 3. Install `flux-client`
-    
+
     * Download a pre-built version...:
 
             $ sudo curl "ftp://ftp.mtri.org/pub/Flux_Visualizations/flux-client.zip" -o "flux-client.zip"
             $ sudo unzip flux-client.zip -d $CLIENT_PATH/flux-client/
-    
+
     * ...or if you want to build from source:
 
             $ cd $REPO_PATH/flux-client/
@@ -178,27 +182,27 @@ The following paths are recommended:
 ### Post-install configuration steps
 
 1. Configure `apache` for port proxying:
-  
+
         $ cd /etc/apache2/
         $ sudo cp httpd.conf httpd.conf.bak
 
      Copy into `httpd.conf` the configuration under *Reverse proxies for Carbon Data Explorer Web API Server* in the provided sample apache configuration file:
-    
+
         $ cat $REPO_PATH/apache/example.conf
 
     And then restart `apache`:
-    
+
         $ sudo apachectl restart
-    
+
 2. Create `mongoDB` data directory and start mongoDB
-  
+
         $ sudo mkdir -p /data/db
         $ sudo mongod
 
 
-    
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-    
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
 Quick Start
 -----------
 
@@ -209,23 +213,23 @@ After installation on either OS, perform the following steps to begin using the 
     A small sample dataset is available in `./flux-python-api/fluxpy/tests/`; use the following command to load this sample data and test that `flux-python-api` installed correctly.
 
     * If using a `virtualenv` (subsitute path to your `virtualenv` if not using default):
-    
+
             $ /usr/local/pythonenv/flux-python-api-env/bin/python ./flux-python-api/manage.py load -p ./flux-python-api/fluxpy/tests/casagfed2004.mat -m SpatioTemporalMatrix -n SAMPLE_casagfed2004
 
     * If NOT using a `virtualenv`:
-    
+
             $ python ./flux-python-api/manage.py load -p ./flux-python-api/fluxpy/tests/casagfed2004.mat -m SpatioTemporalMatrix -n SAMPLE_casagfed2004
-        
+
 2. **Start** the `flux-server` using this command:
 
         $ forever ./flux-server/flux-server.js
-    
+
     Once started, you can test to see if it is working by going to this URL: [http://localhost/flux/api/scenarios.json](http://localhost/flux/api/scenarios.json)
     If you loaded the sample data as instructed above, a pointer to that dataset should show up in the JSON response given by the URL.
-    
+
     To stop or restart `flux-server`, use these commands:
-    
+
         $ forever stop flux-server.js
         $ forever restart 0
-    
+
 3. **Go** to [http://localhost/flux-client](http://localhost/flux-client) and begin exploring!
